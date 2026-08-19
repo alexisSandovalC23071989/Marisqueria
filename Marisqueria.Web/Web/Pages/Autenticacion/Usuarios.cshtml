@@ -1,0 +1,76 @@
+﻿@page
+@model Web.Pages.Autenticacion.UsuariosModel
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+<div class="page-heading">
+    <div>
+        <h1>Usuarios</h1>
+        <p>Administración de usuarios registrados.</p>
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(Model.Error))
+{
+    <div class="mensaje-error">
+        @Model.Error
+    </div>
+}
+
+@if (Model.Usuarios.Count == 0)
+{
+    <p>No hay usuarios registrados.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var usuario in Model.Usuarios)
+            {
+                <tr>
+                    <td>@usuario.Nombre</td>
+                    <td>@usuario.Correo</td>
+                    <td>@usuario.Telefono</td>
+                    <td>@usuario.Rol</td>
+
+                    <td>
+                        <div class="acciones-usuario">
+
+                            <div class="acciones-usuario">
+
+                                <a asp-page="/Autenticacion/EditarUsuario"
+                                   asp-route-id="@usuario.Id"
+                                   class="boton-editar"
+                                   title="Editar usuario">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+
+                                <a asp-page="/Autenticacion/EliminarUsuario"
+                                   asp-route-id="@usuario.Id"
+                                   class="boton-eliminar"
+                                   title="Eliminar usuario">
+                                    <i class="bi bi-trash3"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}

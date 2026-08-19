@@ -1,0 +1,60 @@
+@page
+@model Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<section class="market-hero">
+    <div class="market-hero__content">
+        <span class="market-hero__eyebrow">Pescados y mariscos frescos</span>
+        <h1>Distribuidora de Mariscos De Costa de Pájaros</h1>
+        <p>Selección, trazabilidad y frescura para cada producto que llega del mar a su mesa.</p>
+    </div>
+</section>
+
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <section class="market-sections" aria-labelledby="gestion-title">
+        <div class="section-heading">
+            <span>Operación diaria</span>
+            <h2 id="gestion-title">Gestión de la marisquería</h2>
+        </div>
+        <div class="market-section-grid">
+            <a class="market-section-card market-section-card--products" asp-page="/Productos/Index">
+                <span class="market-section-card__number">01</span>
+                <strong>Productos</strong>
+                <span>Ver catálogo</span>
+            </a>
+            <a class="market-section-card market-section-card--inventory" asp-page="/Inventarios/Index">
+                <span class="market-section-card__number">02</span>
+                <strong>Inventario</strong>
+                <span>Revisar existencias</span>
+            </a>
+            <a class="market-section-card market-section-card--suppliers" asp-page="/Proveedores/Index">
+                <span class="market-section-card__number">03</span>
+                <strong>Proveedores</strong>
+                <span>Ver proveedores</span>
+            </a>
+            <a class="market-section-card market-section-card--promos" asp-page="/Promociones/Index">
+                <span class="market-section-card__number">04</span>
+                <strong>Promociones</strong>
+                <span>Ver promociones</span>
+            </a>
+            <a class="market-section-card market-section-card--suppliers" asp-page="/Pedido/Index">
+                <span class="market-section-card__number">05</span>
+                <strong>Hacer Pedido</strong>
+                <span>Hacer y ver pedidos</span>
+            </a>
+            @if (User.IsInRole("Administrador"))
+            {
+                <a class="market-section-card market-section-card--suppliers" asp-page="/Pedido/Gestion">
+                    <span class="market-section-card__number">06</span>
+                    <strong>Gestionar Pedidos</strong>
+                    <span>Gestionar pedidos</span>
+                </a>
+            }
+        </div>
+    </section>
+}
+
+

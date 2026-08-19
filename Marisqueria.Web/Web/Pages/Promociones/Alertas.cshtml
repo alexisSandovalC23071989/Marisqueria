@@ -1,0 +1,60 @@
+@page
+@model Web.Pages.Promociones.AlertasModel
+@{
+    ViewData["Title"] = "Alertas de promociones";
+}
+<div class="page-heading">
+    <div>
+        <h1>Alertas de promociones</h1>
+        <p>Promociones próximas a vencer que requieren revisión administrativa.</p>
+    </div>
+    <a class="btn btn-primary" asp-page="./Index">Ver promociones</a>
+</div>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<form method="get" class="filter-bar promo-alert-filter">
+    <label>Días de anticipación</label>
+    <input asp-for="DiasAnticipacion" type="number" min="1" max="30" class="form-control" />
+    <label class="check-inline"><input asp-for="MostrarRevisadas" /> Incluir revisadas</label>
+    <button class="btn btn-primary" type="submit">Actualizar</button>
+</form>
+
+@if (Model.Alertas.Any())
+{
+    <div class="promo-alert-list">
+        @foreach (var alerta in Model.Alertas)
+        {
+            <article class="card promo-alert-card @(alerta.Revisada ? "promo-alert-card--reviewed" : "")">
+                <div class="card-body">
+                    <div class="promo-header">
+                        <h2 class="card-title">@alerta.NombrePromocion</h2>
+                        <span class="badge @(alerta.Revisada ? "badge-finalizada" : "badge-programada")">@(alerta.Revisada ? "REVISADA" : "PENDIENTE")</span>
+                    </div>
+                    <p><strong>Finaliza:</strong> @alerta.FechaFin.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p><strong>Tiempo restante:</strong> @(alerta.DiasRestantes <= 0 ? "vence hoy" : $"{alerta.DiasRestantes} día(s)")</p>
+                    <p class="text-muted">Alerta generada: @alerta.FechaGeneracion.ToString("dd/MM/yyyy HH:mm")</p>
+                    <div class="actions">
+                        <a class="btn btn-primary" asp-page="./Detalle" asp-route-id="@alerta.IdPromocion">Ver promoción</a>
+                        @if (!alerta.Revisada)
+                        {
+                            <form method="post" asp-page-handler="Revisar" class="inline-form">
+                                <input type="hidden" name="idAlerta" value="@alerta.IdAlerta" />
+                                <input type="hidden" name="DiasAnticipacion" value="@Model.DiasAnticipacion" />
+                                <input type="hidden" name="MostrarRevisadas" value="@Model.MostrarRevisadas" />
+                                <button class="btn btn-success" type="submit">Marcar revisada</button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+}
+else
+{
+    <div class="empty-state">No hay promociones próximas a vencer para el rango seleccionado.</div>
+}

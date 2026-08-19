@@ -1,0 +1,18 @@
+﻿
+CREATE PROCEDURE [dbo].[PendienteDeRetiro]
+    @IdPedido UNIQUEIDENTIFIER
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+BEGIN TRANSACTION
+
+    UPDATE PEDIDO
+    SET Estado='Pendiente'
+    WHERE IdPedido=@IdPedido;
+
+    SELECT @IdPedido;
+
+COMMIT TRANSACTION
+
+END

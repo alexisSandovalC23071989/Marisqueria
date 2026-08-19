@@ -1,0 +1,7 @@
+CREATE TABLE [dbo].[PROMOCION_CATEGORIA] (
+    [id_promocion] INT NOT NULL,
+    [id_categoria] INT NOT NULL,
+    CONSTRAINT [PK_PROMOCION_CATEGORIA] PRIMARY KEY CLUSTERED ([id_promocion], [id_categoria]),
+    CONSTRAINT [FK_PROMOCION_CATEGORIA_PROMOCION] FOREIGN KEY ([id_promocion]) REFERENCES [dbo].[PROMOCION] ([id_promocion]),
+    CONSTRAINT [FK_PROMOCION_CATEGORIA_CATEGORIA] FOREIGN KEY ([id_categoria]) REFERENCES [dbo].[CATEGORIA] ([id_categoria])
+);

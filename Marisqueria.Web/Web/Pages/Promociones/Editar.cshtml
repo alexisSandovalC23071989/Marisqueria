@@ -1,0 +1,7 @@
+@page "{id:int}"
+@model Web.Pages.Promociones.EditarModel
+@{ ViewData["Title"] = "Editar promoción"; }
+<h1 class="text-center">Editar promoción</h1>
+<partial name="_Formulario" model="Model" />
+
+@section Scripts { @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); } }

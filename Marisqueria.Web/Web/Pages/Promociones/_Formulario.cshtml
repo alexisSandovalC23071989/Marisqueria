@@ -1,0 +1,29 @@
+@model Web.Pages.Promociones.PromocionFormPage
+<div class="form-wrap">
+<form method="post">
+    <div class="form-group"><label asp-for="Promocion.Nombre"></label><input asp-for="Promocion.Nombre" class="form-control"/><span asp-validation-for="Promocion.Nombre" class="text-danger"></span></div>
+    <div class="form-group"><label asp-for="Promocion.Descripcion"></label><textarea asp-for="Promocion.Descripcion" class="form-control"></textarea></div>
+    <div class="form-grid">
+        <div class="form-group"><label asp-for="Promocion.TipoDescuento"></label><select asp-for="Promocion.TipoDescuento" class="form-select"><option value="PORCENTAJE">Porcentaje</option><option value="MONTO">Monto fijo</option></select></div>
+        <div class="form-group"><label asp-for="Promocion.ValorDescuento"></label><input asp-for="Promocion.ValorDescuento" class="form-control" type="number" step="0.01"/><span asp-validation-for="Promocion.ValorDescuento" class="text-danger"></span></div>
+        <div class="form-group"><label asp-for="Promocion.FechaInicio"></label><input asp-for="Promocion.FechaInicio" class="form-control" type="datetime-local"/></div>
+        <div class="form-group"><label asp-for="Promocion.FechaFin"></label><input asp-for="Promocion.FechaFin" class="form-control" type="datetime-local"/><span asp-validation-for="Promocion.FechaFin" class="text-danger"></span></div>
+    </div>
+
+    <div class="promo-target-grid">
+        <div class="form-group">
+            <label>Productos específicos</label>
+            <select asp-for="Promocion.IdsProductos" asp-items="Model.Productos" class="form-select multi-select" multiple></select>
+            <small class="text-muted">Opcional. Use Ctrl (Windows) o Cmd (Mac) para seleccionar varios.</small>
+        </div>
+        <div class="form-group">
+            <label>Categorías completas</label>
+            <select asp-for="Promocion.IdsCategorias" asp-items="Model.Categorias" class="form-select multi-select" multiple></select>
+            <small class="text-muted">Todos los productos actuales de estas categorías recibirán la promoción.</small>
+        </div>
+    </div>
+    <span asp-validation-for="Promocion.IdsProductos" class="text-danger"></span>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="actions"><a class="btn btn-primary" asp-page="./Index">Regresar</a><button class="btn btn-success" type="submit">Guardar</button></div>
+</form>
+</div>

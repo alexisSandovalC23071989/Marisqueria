@@ -1,0 +1,15 @@
+﻿CREATE PROCEDURE [dbo].ObtenerPedidosPendientes
+    
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+BEGIN TRANSACTION
+
+    SELECT *
+    FROM PEDIDO
+    WHERE Estado='Pendiente';
+
+COMMIT TRANSACTION
+
+END

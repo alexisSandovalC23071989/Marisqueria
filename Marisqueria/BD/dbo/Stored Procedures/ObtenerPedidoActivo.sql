@@ -1,0 +1,19 @@
+﻿CREATE PROCEDURE ObtenerPedidoActivo
+
+@IdUsuario UNIQUEIDENTIFIER
+
+AS
+BEGIN
+
+SET NOCOUNT ON;
+
+SELECT TOP 1 *
+
+FROM PEDIDO
+
+WHERE IdUsuario=@IdUsuario
+AND Estado='Carrito'
+
+ORDER BY FechaPedido DESC;
+
+END

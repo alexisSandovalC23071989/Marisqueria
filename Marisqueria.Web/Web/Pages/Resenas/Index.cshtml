@@ -1,0 +1,71 @@
+﻿@page
+@model Web.Pages.Resenas.IndexModel
+@{
+    ViewData["Title"] = "Reseñas";
+}
+
+<div class="page-heading">
+    <div>
+        <h1>Listado de Reseñas</h1>
+        <p>Reseñas registradas para los productos de la marisquería.</p>
+    </div>
+    <a class="btn btn-primary" asp-page="./Agregar"><i class="bi bi-plus-lg" aria-hidden="true"></i>Agregar reseña</a>
+</div>
+
+@if (Model.resenas.Any())
+{
+    <div class="row">
+        @foreach (var resena in Model.resenas)
+        {
+            <div class="card">
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        Producto #@resena.IdProducto
+                    </h5>
+
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        Usuario: @resena.IdUsuario
+                    </h6>
+                    <p class="card-text">
+                        @Html.DisplayFor(modelo => resena.Comentario)
+                    </p>
+
+                    <span class="price">
+                        ⭐ @Html.DisplayFor(modelo => resena.Calificacion)/5
+                    </span>
+
+                    <div class="actions mt-3">
+                        <a type="button"
+                           class="btn btn-warning action-btn"
+                           asp-page="./Editar"
+                           asp-route-id="@resena.IdResena">
+                            <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                            Editar
+                        </a>
+
+                        <a type="button"
+                           class="btn btn-danger action-btn"
+                           asp-page="./Eliminar"
+                           asp-route-id="@resena.IdResena">
+                            <i class="bi bi-trash3" aria-hidden="true"></i>
+                            Eliminar
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">No hay reseñas registradas</h5>
+            <p class="card-text">
+                Agregue la primera reseña para verla en este listado.
+            </p>
+        </div>
+    </div>
+}

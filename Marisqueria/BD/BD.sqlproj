@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>BD</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{0b6d685c-f7c0-4fcb-8864-8f6ced9d9f5a}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>BD</RootNamespace>
+    <AssemblyName>BD</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- ============================= -->
+    <!-- TABLAS IDENTIDAD Y ACCESO -->
+    <!-- ============================= -->
+    <Build Include="dbo\Tables\USUARIO.sql" />
+    <Build Include="dbo\Tables\ROL.sql" />
+    <Build Include="dbo\Tables\RECUPERACION_PASSWORD.sql" />
+    <!-- ============================= -->
+    <!-- TABLAS PRODUCTOS -->
+    <!-- ============================= -->
+    <Build Include="dbo\Tables\CATEGORIA.sql" />
+    <Build Include="dbo\Tables\PRODUCTO.sql" />
+    <!-- ============================= -->
+    <!-- TABLAS PROMOCIONES -->
+    <!-- ============================= -->
+    <Build Include="dbo\Tables\PROMOCION.sql" />
+    <Build Include="dbo\Tables\PROMOCION_PRODUCTO.sql" />
+    <Build Include="dbo\Tables\PROMOCION_CATEGORIA.sql" />
+    <Build Include="dbo\Tables\PROMOCION_ALERTA.sql" />
+    <!-- ============================= -->
+    <!-- USUARIOS -->
+    <!-- ============================= -->
+    <Build Include="dbo\Stored Procedures\ObtenerUsuarios.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerUsuario.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerTokenRecuperacion.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerRoles.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerRol.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarUsuario.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarUsuario.sql" />
+    <Build Include="dbo\Stored Procedures\EditarUsuario.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerUsuarioPorCorreo.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarRecuperacionPassword.sql" />
+    <!-- ============================= -->
+    <!-- RECUPERACION DE CONTRASEÑA -->
+    <!-- ============================= -->
+    <Build Include="dbo\Stored Procedures\ObtenerRecuperacionPorToken.sql" />
+    <Build Include="dbo\Stored Procedures\MarcarRecuperacionUtilizada.sql" />
+    <Build Include="dbo\Stored Procedures\CambiarPassword.sql" />
+    <!-- ============================= -->
+    <!-- INVENTARIO / STOCK -->
+    <!-- ============================= -->
+    <Build Include="dbo\Stored Procedures\ObtenerStockProducto.sql" />
+    <Build Include="dbo\Stored Procedures\DescontarStockProducto.sql" />
+    <Build Include="dbo\Stored Procedures\DevolverStockProducto.sql" />
+    <!-- ============================= -->
+    <!-- PRODUCTOS / CATEGORIAS -->
+    <!-- ============================= -->
+    <Build Include="dbo\Stored Procedures\ObtenerProductos.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerProducto.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerCategoria.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarCategoria.sql" />
+    <Build Include="dbo\Stored Procedures\EditarCategoria.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarCategoria.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarProducto.sql" />
+    <Build Include="dbo\Stored Procedures\EditarProducto.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarProducto.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerCategorias.sql" />
+    <!-- ============================= -->
+    <!-- PROVEEDORES -->
+    <!-- ============================= -->
+    <Build Include="dbo\Stored Procedures\AgregarProductoProveedor.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarProveedor.sql" />
+    <Build Include="dbo\Stored Procedures\EditarProductoProveedor.sql" />
+    <Build Include="dbo\Stored Procedures\EditarProveedor.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarProductoProveedor.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarProveedor.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerProductosPorProveedor.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerProveedor.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerProveedores.sql" />
+    <Build Include="dbo\Tables\PRODUCTO_PROVEEDOR.sql" />
+    <Build Include="dbo\Tables\PROVEEDOR.sql" />
+    <!-- ============================= -->
+    <!-- INVENTARIO -->
+    <!-- ============================= -->
+    <Build Include="dbo\Tables\INVENTARIO.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerInventarios.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerInventario.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarInventario.sql" />
+    <Build Include="dbo\Stored Procedures\EditarInventario.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarInventario.sql" />
+    <!-- ============================= -->
+    <!-- PEDIDOS -->
+    <!-- ============================= -->
+    <Build Include="dbo\Tables\PEDIDO.sql" />
+    <Build Include="dbo\Tables\DETALLE_PEDIDO.sql" />
+    <Build Include="dbo\Stored Procedures\RecalcularTotalPedido.sql" />
+    <Build Include="dbo\Stored Procedures\PendienteDeRetiro.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerPedidos.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerPedidoActivo.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerDetallePedidoPorId.sql" />
+    <Build Include="dbo\Stored Procedures\EditarPedido.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarPedido.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerPedidosPendientes.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerPedidosCliente.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerPedido.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerDetallePedido.sql" />
+    <Build Include="dbo\Stored Procedures\MarcarPedidoPreparado.sql" />
+    <Build Include="dbo\Stored Procedures\EntregarPedido.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarDetallePedido.sql" />
+    <Build Include="dbo\Stored Procedures\ConfirmarPedido.sql" />
+    <Build Include="dbo\Stored Procedures\CancelarPedido.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarPedido.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarDetallePedido.sql" />
+    <Build Include="dbo\Stored Procedures\ActualizarDetallePedido.sql" />
+    <!-- ============================= -->
+    <!-- PROMOCIONES -->
+    <!-- ============================= -->
+    <Build Include="dbo\Stored Procedures\AgregarPromocion.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarPromocionProducto.sql" />
+    <Build Include="dbo\Stored Procedures\EditarPromocion.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarProductosPromocion.sql" />
+    <Build Include="dbo\Stored Procedures\DesactivarPromocion.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerPromociones.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerPromocionesActivas.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerPromocion.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerProductosPromocion.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarPromocionCategoria.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarCategoriasPromocion.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerCategoriasPromocion.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerPrecioPromocionalProducto.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerAlertasPromociones.sql" />
+    <Build Include="dbo\Stored Procedures\MarcarAlertaPromocionRevisada.sql" />
+    <Build Include="dbo\Stored Procedures\ReiniciarAlertaPromocion.sql" />
+    <!-- ============================= -->
+    <!-- RESEÑAS -->
+    <!-- ============================= -->
+    <Build Include="dbo\Tables\RESENA.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerResenasPorProducto.sql" />
+    <Build Include="dbo\Stored Procedures\ObtenerResena.sql" />
+    <Build Include="dbo\Stored Procedures\AgregarResena.sql" />
+    <Build Include="dbo\Stored Procedures\EditarResena.sql" />
+    <Build Include="dbo\Stored Procedures\EliminarResena.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="BD.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeploymentRoles.sql" />
+  </ItemGroup>
+</Project>

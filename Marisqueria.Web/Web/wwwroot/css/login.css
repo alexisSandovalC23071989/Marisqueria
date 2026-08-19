@@ -1,0 +1,321 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+
+
+
+.login-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-volver-inicio {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 10;
+    min-height: 40px;
+    padding: 0 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    background-color: #087f8c;
+    border: 1px solid #087f8c;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btn-volver-inicio:hover,
+.btn-volver-inicio:focus-visible {
+    background-color: #075f69;
+    border-color: #075f69;
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+}
+
+
+
+
+.panel-logo {
+    width: 45%;
+    height: 100vh;
+    background-color: #20a9dc;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+}
+
+
+
+
+    .panel-logo::after {
+        content: "";
+        position: absolute;
+        top: -6%;
+        right: -105px;
+        width: 210px;
+        height: 112%;
+        background-color: white;
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+
+
+
+.logo-mariscos {
+    width: 350px;
+    height: auto;
+    position: relative;
+    z-index: 3;
+    margin-left: -55px;
+}
+
+
+
+
+.panel-login {
+    width: 54%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+
+.login-card {
+    width: 430px;
+    height: 340px;
+ 
+    border-left: 1px solid #777;
+    border-right: 1px solid #777;
+    border-bottom: 1px solid #777;
+    position: relative;
+    text-align: center;
+    padding: 55px 70px 25px 70px;
+    margin-left: -35px;
+}
+
+
+
+
+    .login-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(50% - 48px);
+        height: 1px;
+        background-color: #777;
+    }
+
+
+ 
+
+    .login-card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: calc(50% - 48px);
+        height: 1px;
+        background-color: #777;
+    }
+
+
+
+.icono-usuario {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 0 8px;
+    z-index: 2;
+}
+
+    .icono-usuario i {
+        font-size: 90px;
+        color: black;
+        line-height: 1;
+    }
+
+
+.login-card h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+
+
+.campo {
+    margin-bottom: 14px;
+}
+
+    .campo input {
+        width: 270px;
+        height: 38px;
+        border: 1px solid #aaa;
+        border-radius: 7px;
+        padding-left: 12px;
+        padding-right: 12px;
+        font-size: 13px;
+        outline: none;
+    }
+
+        .campo input:focus {
+            border-color: #777;
+        }
+
+
+
+
+.btn-continuar {
+    width: 150px;
+    height: 36px;
+    border: none;
+    border-radius: 20px;
+    background-color: #9bd522;
+    color: black;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+    .btn-continuar:hover {
+        background-color: #8bc31c;
+    }
+
+
+
+.link-recuperar {
+    display: block;
+    margin-top: 14px;
+    font-size: 11px;
+    color: #1b3172;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+    .link-recuperar:hover {
+        text-decoration: underline;
+    }
+
+
+
+
+.separador {
+    font-size: 13px;
+    margin-top: 7px;
+    margin-bottom: 6px;
+}
+
+
+
+
+.link-registro {
+    font-size: 17px;
+    font-weight: bold;
+    color: #102074;
+    text-decoration: none;
+}
+
+    .link-registro:hover {
+        text-decoration: underline;
+    }
+
+
+
+.mensaje-error {
+    color: #b00020;
+    font-size: 10px;
+    margin-bottom: 7px;
+}
+
+.error-validacion {
+    display: block;
+    color: #b00020;
+    font-size: 9px;
+    text-align: left;
+}
+
+
+
+
+@media (max-width: 700px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .login-page {
+        flex-direction: column;
+    }
+
+    .btn-volver-inicio {
+        top: 164px;
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .panel-logo {
+        width: 100%;
+        height: 220px;
+    }
+
+        .panel-logo::after {
+            display: none;
+        }
+
+    .logo-mariscos {
+        width: 120px;
+        margin-left: 0;
+        transform: translateY(-22px);
+    }
+
+    .panel-login {
+        width: 100%;
+        min-height: 450px;
+    }
+
+    .login-card {
+        width: 90%;
+        max-width: 430px;
+        height: 340px;
+        margin-left: 0;
+        padding: 55px 30px 25px 30px;
+    }
+
+    .campo input {
+        width: 100%;
+        max-width: 270px;
+    }
+}

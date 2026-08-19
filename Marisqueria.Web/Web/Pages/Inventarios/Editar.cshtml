@@ -1,0 +1,54 @@
+@page
+@model Web.Pages.Inventarios.EditarModel
+@{
+    ViewData["Title"] = "Editar inventario";
+}
+
+<h1 class="text-center">Editar inventario</h1>
+<div class="form-wrap">
+    <form method="post">
+        <input type="hidden" asp-for="Inventario.IdInventario" />
+        <div class="form-grid">
+            <div class="form-group">
+                <label asp-for="Inventario.IdProducto"></label>
+                <select class="form-select" asp-for="Inventario.IdProducto" asp-items="Model.Productos"></select>
+                <span class="text-danger" asp-validation-for="Inventario.IdProducto"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inventario.IdProveedor"></label>
+                <select class="form-select" asp-for="Inventario.IdProveedor" asp-items="Model.Proveedores"></select>
+                <span class="text-danger" asp-validation-for="Inventario.IdProveedor"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inventario.Lote"></label>
+                <input class="form-control" asp-for="Inventario.Lote" />
+                <span class="text-danger" asp-validation-for="Inventario.Lote"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inventario.CantidadDisponible"></label>
+                <input class="form-control" asp-for="Inventario.CantidadDisponible" type="number" min="0" step="0.01" />
+                <span class="text-danger" asp-validation-for="Inventario.CantidadDisponible"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inventario.FechaIngreso"></label>
+                <input class="form-control" asp-for="Inventario.FechaIngreso" type="date" asp-format="{0:yyyy-MM-dd}" />
+                <span class="text-danger" asp-validation-for="Inventario.FechaIngreso"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inventario.FechaVencimiento"></label>
+                <input class="form-control" asp-for="Inventario.FechaVencimiento" type="date" asp-format="{0:yyyy-MM-dd}" />
+                <span class="text-danger" asp-validation-for="Inventario.FechaVencimiento"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Inventario.Ubicacion"></label>
+            <input class="form-control" asp-for="Inventario.Ubicacion" />
+            <span class="text-danger" asp-validation-for="Inventario.Ubicacion"></span>
+        </div>
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="actions">
+            <a class="btn btn-primary" asp-page="./Index">Regresar</a>
+            <button class="btn btn-success" type="submit">Guardar</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,236 @@
+@page
+@model Web.Pages.Productos.DetalleModel
+
+@{
+    ViewData["Title"] = "Detalle Producto";
+}
+
+
+
+
+<h1>Detalle Producto</h1>
+
+<div class="card detalle-producto">
+
+    <div class="card-body">
+
+        <div class="detail-grid">
+
+            <!-- IMAGEN -->
+
+            <img class="detail-img"
+                 src="@Model.producto.Imagen"
+                 alt="@Model.producto.Nombre"
+                 onerror="this.style.display='none';" />
+
+
+            <div>
+
+
+                <h5 class="card-title">
+                    @Html.DisplayFor(modelo => modelo.producto.Nombre)
+                </h5>
+
+
+                <h6 class="card-subtitle">
+                    @Html.DisplayFor(modelo => modelo.producto.Categoria)
+                </h6>
+
+
+                <p class="card-text">
+                    @Html.DisplayFor(modelo => modelo.producto.Descripcion)
+                </p>
+
+
+                <div>
+
+                    <b>
+                        @Html.DisplayNameFor(
+                            modelo => modelo.producto.PrecioVentaActual):
+                    </b>
+
+                    @if (Model.Promocion != null)
+                    {
+                        <span class="promo-original-price">
+                            @Model.Promocion.PrecioOriginal.ToString("C")
+                        </span>
+
+                        <strong class="promo-current-price">
+                            @Model.Promocion.PrecioPromocional.ToString("C")
+                        </strong>
+
+                        <div class="promo-product-notice">
+
+                            @Model.Promocion.NombrePromocion
+                            — ahorra
+                            @Model.Promocion.Ahorro.ToString("C")
+
+                            (vigente hasta
+                            @Model.Promocion.FechaFin.ToString("dd/MM/yyyy HH:mm"))
+
+                        </div>
+                    }
+                    else
+                    {
+                        @Model.producto.PrecioVentaActual.ToString("C")
+                    }
+
+                </div>
+
+
+                <div>
+
+                    <b>
+                        @Html.DisplayNameFor(
+                            modelo => modelo.producto.Imagen):
+                    </b>
+
+                    @Html.DisplayFor(
+                        modelo => modelo.producto.Imagen)
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<hr />
+
+<h2>Reseñas</h2>
+
+@if (Model.Resenas.Any())
+{
+    @foreach (var resena in Model.Resenas)
+    {
+        <div class="card resena-card mb-3">
+
+            <div class="card-body">
+
+                <!-- ESTRELLAS -->
+                <div class="estrellas-mostradas">
+
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= resena.Calificacion)
+                        {
+                            <span class="estrella-activa">★</span>
+                        }
+                        else
+                        {
+                            <span class="estrella-inactiva">☆</span>
+                        }
+                    }
+
+                </div>
+
+                <p class="card-text">
+                    @resena.Comentario
+                </p>
+
+                <small class="text-muted d-block mb-3">
+                    @resena.Fecha.ToString("dd/MM/yyyy HH:mm")
+                </small>
+
+
+                    
+
+
+                <div class="resena-acciones">  <a asp-page="/Resenas/Editar" asp-route-idResena="@resena.IdResena" asp-route-idProducto="@Model.producto.IdProducto" class="btn btn-warning"> Editar </a> <!-- ELIMINAR --> <a asp-page="/Resenas/Eliminar" asp-route-idResena="@resena.IdResena" asp-route-idProducto="@Model.producto.IdProducto" class="btn btn-danger"> Eliminar </a> </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="sin-resenas"> Este producto todavía no tiene reseñas. </div>
+}
+
+
+
+
+
+
+@if (!string.IsNullOrEmpty(Model.ErrorResena))
+{
+    <div class="alert alert-danger">
+
+        @Model.ErrorResena
+
+    </div>
+}
+
+
+
+
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <div class="acciones-resenas">
+
+        <a asp-page="/Resenas/Agregar"
+           asp-route-idProducto="@Model.producto.IdProducto"
+           class="btn btn-primary">
+
+            Escribir una reseña
+
+        </a>
+
+    </div>
+}
+else
+{
+    <div class="alert alert-info">
+
+        Debes iniciar sesión para escribir una reseña.
+
+        <a asp-page="/Autenticacion/Login"
+           class="alert-link">
+
+            Iniciar sesión
+
+        </a>
+
+    </div>
+}
+
+
+
+
+<br />
+
+<div class="actions">
+
+
+    <a class="btn btn-primary"
+       asp-page="./Index">
+
+        <i class="bi bi-arrow-left" aria-hidden="true"></i>
+        Regresar
+
+    </a>
+
+
+
+    @if (User.IsInRole("Administrador"))
+    {
+        <a class="btn btn-warning"
+           asp-page="./Editar"
+           asp-route-id="@Model.producto.IdProducto">
+            <i class="bi bi-pencil-square" aria-hidden="true"></i>
+            Editar producto
+        </a>
+    }
+
+</div>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

@@ -1,0 +1,15 @@
+﻿CREATE PROCEDURE [dbo].[EliminarPedido]
+    @IdPedido UNIQUEIDENTIFIER
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRANSACTION
+
+    DELETE FROM dbo.PEDIDO
+    WHERE IdPedido = @IdPedido;
+
+    SELECT @IdPedido;
+
+    COMMIT TRANSACTION
+END

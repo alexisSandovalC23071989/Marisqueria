@@ -1,0 +1,84 @@
+﻿@page
+@model Web.Pages.Proveedores.IndexModel
+@{
+    ViewData["Title"] = "Proveedores";
+}
+
+<div class="module-header">
+    <div>
+        <h1>Proveedores</h1>
+        <p>Empresas que abastecen los productos de la marisquería.</p>
+    </div>
+    @if (User.IsInRole("Administrador"))
+    {
+        <a class="btn btn-primary" asp-page="./Agregar">
+            <i class="bi bi-plus-lg" aria-hidden="true"></i>
+            Agregar proveedor
+        </a>
+    }
+</div>
+
+@if (Model.proveedores.Count == 0)
+{
+    <p class="text-center mt-4">No hay proveedores registrados.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Empresa</th>
+                <th>Cédula Jurídica</th>
+                <th>Contacto</th>
+                <th>Teléfono</th>
+                <th>Correo</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var proveedor in Model.proveedores)
+            {
+                <tr>
+                    <td>@proveedor.Empresa</td>
+                    <td>@proveedor.CedulaJuridica</td>
+                    <td>@proveedor.Contacto</td>
+                    <td>@proveedor.Telefono</td>
+                    <td>@proveedor.Correo</td>
+                    <td>
+                        @if (proveedor.Estado == "Activo")
+                        {
+                            <span class="badge bg-success">Activo</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Inactivo</span>
+                        }
+                    </td>
+                    <td>
+                        <div class="inline-actions">
+                        <a class="btn btn-primary btn-sm action-btn" asp-page="./Detalle" asp-route-id="@proveedor.IdProveedor">
+                            <i class="bi bi-eye" aria-hidden="true"></i>
+                            Detalle
+                        </a>
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <a class="btn btn-warning btn-sm action-btn" asp-page="./Editar" asp-route-id="@proveedor.IdProveedor">
+                                <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                                Editar
+                            </a>
+                            <form method="post" asp-page-handler="Eliminar" asp-route-id="@proveedor.IdProveedor"
+                                  onsubmit="return confirm('¿Eliminar a @proveedor.Empresa? Esto también quita los productos que suministra.');">
+                                <button type="submit" class="btn btn-danger btn-sm action-btn">
+                                    <i class="bi bi-trash3" aria-hidden="true"></i>
+                                    Eliminar
+                                </button>
+                            </form>
+                        }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

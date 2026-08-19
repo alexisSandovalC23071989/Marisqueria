@@ -1,0 +1,236 @@
+.products-page {
+    width: 100%;
+}
+
+.products-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--ice-200);
+}
+
+.products-heading h1 {
+    margin: 0;
+    color: var(--ocean-950);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.3rem;
+}
+
+.products-heading p {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.product-card {
+    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--ice-200);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.product-card__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: var(--ice-100);
+    border-bottom: 4px solid var(--teal-500);
+}
+
+.product-card__media--empty::after {
+    content: "Producto sin imagen";
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.product-card__image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    padding: 0.75rem;
+}
+
+.product-card__image--fallback {
+    object-fit: cover;
+    object-position: 72% center;
+    padding: 0;
+}
+
+.product-card__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.15rem;
+}
+
+.product-card__category {
+    width: fit-content;
+    margin-bottom: 0.7rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--teal-100);
+    border-radius: 4px;
+    color: var(--ocean-700);
+    font-size: 0.7rem;
+    font-weight: 850;
+    text-transform: uppercase;
+}
+
+.product-card__title {
+    margin: 0 0 0.4rem;
+    color: var(--ocean-950);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.25rem;
+}
+
+.product-card__description {
+    min-height: 2.8em;
+    margin: 0 0 1rem;
+    overflow: hidden;
+    display: -webkit-box;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.4;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.product-card__price {
+    margin-top: auto;
+    color: var(--coral-600);
+    font-size: 1.3rem;
+    font-weight: 900;
+}
+
+.product-card__actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4rem;
+    margin-top: 1rem;
+}
+
+.product-card__actions--viewer {
+    grid-template-columns: 1fr;
+}
+
+.product-card__actions .btn {
+    min-width: 0;
+    padding-inline: 0.35rem;
+    font-size: 0.76rem;
+}
+
+.products-empty-state {
+    padding: 2.5rem;
+    background: var(--white);
+    border: 1px dashed #9db7b4;
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.products-empty-state h2 {
+    margin: 0 0 0.4rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.35rem;
+}
+
+.products-empty-state p {
+    margin: 0;
+    color: var(--muted);
+}
+
+@media (max-width: 700px) {
+    .products-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .products-heading h1 {
+        font-size: 1.9rem;
+    }
+
+    .products-heading > .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 420px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-card__actions {
+        grid-template-columns: 1fr;
+    }
+
+
+    .detalle-producto {
+        margin-bottom: 30px;
+    }
+
+
+
+    .estrellas-mostradas {
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+
+    .estrella-activa {
+        color: #ffc107;
+    }
+
+    .estrella-inactiva {
+        color: #ccc;
+    }
+
+    .resena-card {
+        margin-bottom: 15px;
+        border-radius: 10px;
+    }
+
+    .resena-acciones {
+        margin-top: 15px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+
+
+    .sin-resenas {
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        color: #6c757d;
+    }
+
+
+    .acciones-resenas {
+        margin-top: 25px;
+        margin-bottom: 30px;
+    }
+
+
+}

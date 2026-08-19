@@ -1,0 +1,41 @@
+﻿@page "{idProveedor:int}"
+@model Web.Pages.Proveedores.AgregarProductoModel
+@{
+    ViewData["Title"] = "Agregar Producto al Proveedor";
+}
+
+<h1 class="text-center">Agregar Producto</h1>
+<p class="text-center">Proveedor: <b>@Model.NombreProveedor</b></p>
+
+<div class="form-wrap">
+    <form method="POST">
+        <div class="form-group">
+            <label for="productos">Producto</label>
+            <select asp-for="productoProveedor.IdProducto" class="form-select" asp-items="Model.productos" id="productos">
+                <option value="">Seleccione un producto</option>
+            </select>
+            <span class="text-danger" asp-validation-for="productoProveedor.IdProducto"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" asp-for="productoProveedor.PrecioCompra"></label>
+            <input class="form-control" asp-for="productoProveedor.PrecioCompra" />
+            <span class="text-danger" asp-validation-for="productoProveedor.PrecioCompra"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label" asp-for="productoProveedor.UnidadMedida"></label>
+            <input class="form-control" asp-for="productoProveedor.UnidadMedida" placeholder="kg, unidad, caja..." />
+            <span class="text-danger" asp-validation-for="productoProveedor.UnidadMedida"></span>
+        </div>
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <div class="actions">
+            <a type="button" class="btn btn-primary" asp-page="./Detalle" asp-route-id="@Model.IdProveedor">Regresar</a>
+            <input type="submit" class="btn btn-success" value="Agregar" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

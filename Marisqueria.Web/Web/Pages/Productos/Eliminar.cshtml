@@ -1,0 +1,42 @@
+@page
+@model Web.Pages.Productos.EliminarModel
+@{
+    ViewData["Title"] = "Eliminar Producto";
+}
+
+<div class="module-header">
+    <div>
+        <h1>Eliminar producto</h1>
+        <p>Revise la información antes de confirmar esta acción.</p>
+    </div>
+</div>
+
+<form method="post">
+    <div class="card">
+        <div class="card-body">
+            <div class="detail-grid">
+                <img class="detail-img" src="@Model.producto.Imagen" alt="@Model.producto.Nombre" onerror="this.style.display='none';" />
+                <div>
+                    <h5 class="card-title">@Html.DisplayFor(modelo => modelo.producto.Nombre)</h5>
+                    <h6 class="card-subtitle">@Html.DisplayFor(modelo => modelo.producto.Categoria)</h6>
+                    <p class="card-text">@Html.DisplayFor(modelo => modelo.producto.Descripcion)</p>
+                    <div>
+                        <b>@Html.DisplayNameFor(modelo => modelo.producto.PrecioVentaActual): </b>
+                        @Model.producto.PrecioVentaActual.ToString("C")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="actions">
+        <a class="btn btn-secondary" asp-page="./Index">
+            <i class="bi bi-arrow-left" aria-hidden="true"></i>
+            Regresar
+        </a>
+        <button type="submit" class="btn btn-danger">
+            <i class="bi bi-trash3" aria-hidden="true"></i>
+            Eliminar producto
+        </button>
+    </div>
+</form>

@@ -1,0 +1,85 @@
+@page
+@model Web.Pages.Inventarios.IndexModel
+@{
+    ViewData["Title"] = "Inventario";
+}
+
+<section>
+    <div class="module-header">
+        <div>
+            <h1>Inventario</h1>
+            <p>Existencias por producto, proveedor y lote.</p>
+        </div>
+        @if (User.IsInRole("Administrador"))
+        {
+            <a class="btn btn-primary" asp-page="./Agregar">
+                <i class="bi bi-plus-lg" aria-hidden="true"></i>
+                Agregar inventario
+            </a>
+        }
+    </div>
+
+    @if (TempData["Mensaje"] is string mensaje)
+    {
+        <p class="badge badge-stock">@mensaje</p>
+    }
+
+    @if (Model.Inventarios.Any())
+    {
+        <div class="table-wrap">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Producto</th><th>Proveedor</th><th>Lote</th><th>Cantidad</th>
+                        <th>Vencimiento</th><th>Ubicación</th><th>Estado</th><th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var inventario in Model.Inventarios)
+                {
+                    var dias = (inventario.FechaVencimiento.Date - DateTime.Today).Days;
+                    var claseEstado = dias < 0 ? "badge-expired" : dias <= 30 ? "badge-warning" : "badge-stock";
+                    var estado = dias < 0 ? "Vencido" : dias <= 30 ? "Por vencer" : "Disponible";
+                    <tr>
+                        <td>@inventario.Producto</td>
+                        <td>@inventario.Proveedor</td>
+                        <td>@inventario.Lote</td>
+                        <td>@inventario.CantidadDisponible.ToString("N2")</td>
+                        <td>@inventario.FechaVencimiento.ToString("dd/MM/yyyy")</td>
+                        <td>@inventario.Ubicacion</td>
+                        <td><span class="badge @claseEstado">@estado</span></td>
+                        <td>
+                            <div class="inline-actions">
+                                <a class="btn btn-primary btn-sm action-btn" asp-page="./Detalle" asp-route-id="@inventario.IdInventario">
+                                    <i class="bi bi-eye" aria-hidden="true"></i>
+                                    Detalle
+                                </a>
+                                @if (User.IsInRole("Administrador"))
+                                {
+                                    <a class="btn btn-warning btn-sm action-btn" asp-page="./Editar" asp-route-id="@inventario.IdInventario">
+                                        <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                                        Editar
+                                    </a>
+                                    <form method="post" asp-page-handler="Eliminar" asp-route-id="@inventario.IdInventario" onsubmit="return confirm('¿Desea eliminar este registro de inventario?');">
+                                        <button class="btn btn-danger btn-sm action-btn" type="submit">
+                                            <i class="bi bi-trash3" aria-hidden="true"></i>
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <h2>No hay inventario registrado</h2>
+            <p>Agregue el primer lote para controlar las existencias.</p>
+        </div>
+    }
+</section>

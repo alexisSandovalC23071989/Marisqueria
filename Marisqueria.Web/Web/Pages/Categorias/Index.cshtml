@@ -1,0 +1,78 @@
+@page
+@model Web.Pages.Categorias.IndexModel
+@{
+    ViewData["Title"] = "Categorías";
+}
+
+<section>
+    <div class="module-header">
+        <div>
+            <h1>Categorías</h1>
+            <p>Clasificación disponible para los productos.</p>
+        </div>
+        @if (User.IsInRole("Administrador"))
+        {
+            <a class="btn btn-primary" asp-page="./Agregar">
+                <i class="bi bi-plus-lg" aria-hidden="true"></i>
+                Agregar categoría
+            </a>
+        }
+    </div>
+
+    @if (TempData["Mensaje"] is string mensaje)
+    {
+        <p class="badge badge-stock">@mensaje</p>
+    }
+    @if (TempData["Error"] is string error)
+    {
+        <p class="text-danger">@error</p>
+    }
+
+    @if (Model.Categorias.Any())
+    {
+        <div class="table-wrap">
+            <table class="table">
+                <thead>
+                    <tr><th>Id</th><th>Nombre</th><th>Acciones</th></tr>
+                </thead>
+                <tbody>
+                @foreach (var categoria in Model.Categorias)
+                {
+                    <tr>
+                        <td>@categoria.IdCategoria</td>
+                        <td>@categoria.Nombre</td>
+                        <td>
+                            <div class="inline-actions">
+                                <a class="btn btn-primary btn-sm action-btn" asp-page="./Detalle" asp-route-id="@categoria.IdCategoria">
+                                    <i class="bi bi-eye" aria-hidden="true"></i>
+                                    Detalle
+                                </a>
+                                @if (User.IsInRole("Administrador"))
+                                {
+                                    <a class="btn btn-warning btn-sm action-btn" asp-page="./Editar" asp-route-id="@categoria.IdCategoria">
+                                        <i class="bi bi-pencil-square" aria-hidden="true"></i>
+                                        Editar
+                                    </a>
+                                    <form method="post" asp-page-handler="Eliminar" asp-route-id="@categoria.IdCategoria" onsubmit="return confirm('¿Desea eliminar esta categoría?');">
+                                        <button class="btn btn-danger btn-sm action-btn" type="submit">
+                                            <i class="bi bi-trash3" aria-hidden="true"></i>
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="empty-state">
+            <h2>No hay categorías registradas</h2>
+            <p>Agregue una categoría para comenzar.</p>
+        </div>
+    }
+</section>

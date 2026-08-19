@@ -1,0 +1,22 @@
+﻿CREATE PROCEDURE ObtenerTokenRecuperacion
+    @Token VARCHAR(250)
+
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    SELECT
+        RECUPERACION_PASSWORD.Id,
+        RECUPERACION_PASSWORD.Token,
+        RECUPERACION_PASSWORD.FechaCreacion,
+        RECUPERACION_PASSWORD.FechaExpiracion,
+        RECUPERACION_PASSWORD.Utilizado,
+        USUARIO.Nombre,
+        USUARIO.Correo
+    FROM RECUPERACION_PASSWORD
+        INNER JOIN USUARIO
+            ON RECUPERACION_PASSWORD.IdUsuario = USUARIO.Id
+    WHERE RECUPERACION_PASSWORD.Token = @Token;
+
+END

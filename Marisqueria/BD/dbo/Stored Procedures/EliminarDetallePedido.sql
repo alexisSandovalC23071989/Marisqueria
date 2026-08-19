@@ -1,0 +1,16 @@
+﻿CREATE PROCEDURE [dbo].EliminarDetallePedido
+    @IdDetalle UNIQUEIDENTIFIER
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+BEGIN TRANSACTION
+
+    DELETE FROM DETALLE_PEDIDO
+    WHERE IdDetalle=@IdDetalle;
+
+    SELECT @IdDetalle;
+
+COMMIT TRANSACTION
+
+END

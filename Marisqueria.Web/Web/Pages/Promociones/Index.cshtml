@@ -1,0 +1,49 @@
+@page
+@model Web.Pages.Promociones.IndexModel
+@{
+    ViewData["Title"] = "Promociones";
+}
+<div class="page-heading">
+    <div><h1>Promociones</h1><p>Administración e historial de campañas de descuento.</p></div>
+    @if (User.IsInRole("Administrador"))
+    {
+        <div class="actions">
+            <a class="btn btn-warning" asp-page="./Alertas"><i class="bi bi-bell" aria-hidden="true"></i>Alertas</a>
+            <a class="btn btn-primary" asp-page="./Agregar"><i class="bi bi-plus-lg" aria-hidden="true"></i>Crear promoción</a>
+        </div>
+    }
+</div>
+<form method="get" class="filter-bar">
+    <select name="estado" class="form-select">
+        <option value="">Todos los estados</option>
+        @foreach (var estado in new[] { "ACTIVA", "PROGRAMADA", "FINALIZADA", "DESACTIVADA" })
+        {
+            <option value="@estado" selected="@(Model.Estado == estado)">@estado</option>
+        }
+    </select>
+    <button class="btn btn-primary" type="submit">Filtrar</button>
+</form>
+@if (Model.Promociones.Any())
+{
+    <div class="row">
+    @foreach (var p in Model.Promociones)
+    {
+        <article class="card"><div class="card-body">
+            <div class="promo-header"><h2 class="card-title">@p.Nombre</h2><span class="badge badge-@p.Estado.ToLower()">@p.Estado</span></div>
+            <p class="card-text">@p.Descripcion</p>
+            <div class="discount">@(p.TipoDescuento == "PORCENTAJE" ? $"{p.ValorDescuento:0.##}%" : p.ValorDescuento.ToString("C")) de descuento</div>
+            <p class="text-muted">Vigencia: @p.FechaInicio.ToString("dd/MM/yyyy") – @p.FechaFin.ToString("dd/MM/yyyy")</p>
+            <p><strong>@p.Productos.Count</strong> producto(s) afectado(s) · <strong>@p.Categorias.Count</strong> categoría(s) seleccionada(s)</p>
+            <div class="actions">
+                <a class="btn btn-primary action-btn" asp-page="./Detalle" asp-route-id="@p.IdPromocion"><i class="bi bi-eye" aria-hidden="true"></i>Detalle</a>
+                @if (User.IsInRole("Administrador") && p.Estado != "DESACTIVADA")
+                {
+                    <a class="btn btn-warning action-btn" asp-page="./Editar" asp-route-id="@p.IdPromocion"><i class="bi bi-pencil-square" aria-hidden="true"></i>Editar</a>
+                    <a class="btn btn-danger action-btn" asp-page="./Desactivar" asp-route-id="@p.IdPromocion"><i class="bi bi-x-circle" aria-hidden="true"></i>Desactivar</a>
+                }
+            </div>
+        </div></article>
+    }
+    </div>
+}
+else { <div class="empty-state">No hay promociones para el filtro seleccionado.</div> }

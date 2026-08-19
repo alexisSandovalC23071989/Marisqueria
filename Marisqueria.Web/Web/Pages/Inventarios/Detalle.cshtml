@@ -1,0 +1,25 @@
+@page
+@model Web.Pages.Inventarios.DetalleModel
+@{
+    ViewData["Title"] = "Detalle de inventario";
+}
+
+<h1 class="text-center">Detalle de inventario</h1>
+<div class="form-wrap">
+    <dl class="detail-list">
+        <dt>Producto</dt><dd>@Model.Inventario.Producto</dd>
+        <dt>Proveedor</dt><dd>@Model.Inventario.Proveedor</dd>
+        <dt>Lote</dt><dd>@Model.Inventario.Lote</dd>
+        <dt>Cantidad disponible</dt><dd>@Model.Inventario.CantidadDisponible.ToString("N2")</dd>
+        <dt>Fecha de ingreso</dt><dd>@Model.Inventario.FechaIngreso.ToString("dd/MM/yyyy")</dd>
+        <dt>Fecha de vencimiento</dt><dd>@Model.Inventario.FechaVencimiento.ToString("dd/MM/yyyy")</dd>
+        <dt>Ubicación</dt><dd>@Model.Inventario.Ubicacion</dd>
+    </dl>
+    <div class="actions">
+        <a class="btn btn-primary" asp-page="./Index">Regresar</a>
+        @if (User.IsInRole("Administrador"))
+        {
+            <a class="btn btn-warning" asp-page="./Editar" asp-route-id="@Model.Inventario.IdInventario">Editar</a>
+        }
+    </div>
+</div>

@@ -1,0 +1,216 @@
+﻿@page
+@model Web.Pages.Resenas.EditarModel
+
+@{
+    ViewData["Title"] = "Editar reseña";
+}
+
+<style>
+    .resena-container {
+        max-width: 700px;
+        margin: 40px auto;
+    }
+
+    .resena-card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+        .resena-card h1 {
+            margin-bottom: 10px;
+        }
+
+    .resena-subtitulo {
+        color: #6c757d;
+        margin-bottom: 25px;
+    }
+
+   
+    .estrellas {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        width: fit-content;
+    }
+
+        .estrellas input {
+            display: none;
+        }
+
+        .estrellas label {
+            font-size: 45px;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            line-height: 1;
+        }
+
+
+            .estrellas label:hover,
+            .estrellas label:hover ~ label {
+                color: #ffc107;
+            }
+
+        /* Estrellas seleccionadas */
+
+        .estrellas input:checked ~ label {
+            color: #ffc107;
+        }
+
+    .comentario {
+        margin-top: 25px;
+    }
+
+        .comentario textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+    .acciones {
+        margin-top: 25px;
+        display: flex;
+        gap: 10px;
+    }
+</style>
+
+<div class="resena-container">
+
+    <div class="resena-card">
+
+        <h1>Editar reseña</h1>
+
+        <p class="resena-subtitulo">
+            Modifica tu opinión sobre este producto.
+        </p>
+
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorResena))
+        {
+            <div class="alert alert-danger">
+                @Model.ErrorResena
+            </div>
+        }
+
+        <form method="post">
+
+           
+
+            <input type="hidden"
+                   asp-for="IdResena" />
+
+            
+
+            <input type="hidden"
+                   asp-for="IdProducto" />
+
+         
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Calificación
+                </label>
+
+                <div class="estrellas">
+
+                    <input type="radio"
+                           asp-for="Calificacion"
+                           value="5"
+                           id="estrella5" />
+
+                    <label for="estrella5">★</label>
+
+
+                    <input type="radio"
+                           asp-for="Calificacion"
+                           value="4"
+                           id="estrella4" />
+
+                    <label for="estrella4">★</label>
+
+
+                    <input type="radio"
+                           asp-for="Calificacion"
+                           value="3"
+                           id="estrella3" />
+
+                    <label for="estrella3">★</label>
+
+
+                    <input type="radio"
+                           asp-for="Calificacion"
+                           value="2"
+                           id="estrella2" />
+
+                    <label for="estrella2">★</label>
+
+
+                    <input type="radio"
+                           asp-for="Calificacion"
+                           value="1"
+                           id="estrella1" />
+
+                    <label for="estrella1">★</label>
+
+                </div>
+
+                <span asp-validation-for="Calificacion"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+           
+
+            <div class="comentario">
+
+                <label asp-for="Comentario"
+                       class="form-label">
+
+                    Comentario
+
+                </label>
+
+                <textarea asp-for="Comentario"
+                          class="form-control"
+                          placeholder="Escribe tu opinión sobre este producto..."></textarea>
+
+                <span asp-validation-for="Comentario"
+                      class="text-danger">
+                </span>
+
+            </div>
+
+      
+
+            <div class="acciones">
+
+                <button type="submit"
+                        class="btn btn-warning">
+
+                    Guardar cambios
+
+                </button>
+
+                <a asp-page="/Productos/Detalle"
+                   asp-route-id="@Model.IdProducto"
+                   class="btn btn-secondary">
+
+                    Cancelar
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

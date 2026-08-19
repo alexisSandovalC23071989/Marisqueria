@@ -1,0 +1,10 @@
+﻿CREATE PROCEDURE MarcarRecuperacionUtilizada
+    @Id UNIQUEIDENTIFIER
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE RECUPERACION_PASSWORD
+    SET Utilizado = 1
+    WHERE Id = @Id;
+END

@@ -1,0 +1,21 @@
+﻿CREATE PROCEDURE ObtenerUsuarios
+
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+
+
+  SELECT
+    USUARIO.Id,
+    USUARIO.IdRol,
+    USUARIO.Nombre,
+    USUARIO.Correo,
+    USUARIO.Telefono,
+    ROL.Nombre AS Rol
+FROM USUARIO
+INNER JOIN ROL
+    ON USUARIO.IdRol = ROL.Id;
+
+END

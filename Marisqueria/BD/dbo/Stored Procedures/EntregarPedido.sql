@@ -1,0 +1,18 @@
+﻿CREATE PROCEDURE [dbo].EntregarPedido
+    @IdPedido UNIQUEIDENTIFIER
+
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+BEGIN TRANSACTION
+
+    UPDATE PEDIDO
+    SET Estado='Entregado'
+    WHERE IdPedido=@IdPedido;
+
+    SELECT @IdPedido;
+
+COMMIT TRANSACTION
+
+END

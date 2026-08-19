@@ -1,0 +1,49 @@
+﻿@page
+@model Web.Pages.Resenas.EliminarModel
+
+@{
+    ViewData["Title"] = "Eliminar Reseña";
+}
+
+<div class="container mt-4">
+
+    ```
+    <h1>Eliminar Reseña</h1>
+
+    <div class="alert alert-warning">
+
+        <h4 class="alert-heading">
+            ¿Está seguro?
+        </h4>
+
+        <p>
+            Esta acción eliminará la reseña permanentemente.
+        </p>
+
+        <hr />
+
+        <form method="post">
+
+            <input type="hidden"
+                   asp-for="IdResena" />
+
+            <input type="hidden"
+                   asp-for="IdProducto" />
+
+            <button type="submit"
+                    class="btn btn-danger">
+                Sí, eliminar reseña
+            </button>
+
+            <a asp-page="/Productos/Detalle"
+               asp-route-id="@Model.IdProducto"
+               class="btn btn-secondary">
+                Cancelar
+            </a>
+
+        </form>
+
+    </div>
+    ```
+
+</div>

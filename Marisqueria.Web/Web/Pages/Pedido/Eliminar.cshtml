@@ -1,0 +1,53 @@
+@page
+@model Web.Pages.Pedido.EliminarModel
+
+@{
+    ViewData["Title"] = "Eliminar Pedido";
+}
+
+<h1 class="text-center">
+    Eliminar Pedido
+</h1>
+
+<div class="form-wrap">
+
+    <div class="alert alert-warning">
+
+        ¿Está seguro de que desea eliminar este pedido?
+
+    </div>
+
+    <p>
+        <strong>Fecha:</strong>
+        @Model.pedido.FechaPedido.ToString("dd/MM/yyyy HH:mm")
+    </p>
+
+    <p>
+        <strong>Estado:</strong>
+        @Model.pedido.Estado
+    </p>
+
+    <p>
+        <strong>Total:</strong>
+        ₡@Model.pedido.Total.ToString("N2")
+    </p>
+
+    <form method="POST">
+
+        <input type="hidden"
+               name="id"
+               value="@Model.pedido.IdPedido" />
+
+        <a asp-page="./Index"
+           class="btn btn-primary">
+            Regresar
+        </a>
+
+        <button type="submit"
+                class="btn btn-danger">
+            Eliminar Pedido
+        </button>
+
+    </form>
+
+</div>

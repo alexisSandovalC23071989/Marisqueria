@@ -1,0 +1,11 @@
+﻿CREATE PROCEDURE [dbo].[ObtenerPedido]
+    @IdPedido UNIQUEIDENTIFIER
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT *
+    FROM PEDIDO
+    WHERE IdPedido=@IdPedido;
+
+END

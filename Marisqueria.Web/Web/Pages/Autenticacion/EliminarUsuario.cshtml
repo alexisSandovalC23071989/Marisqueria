@@ -1,0 +1,63 @@
+﻿@page "{id:guid}"
+@model Web.Pages.Autenticacion.EliminarUsuarioModel
+@{
+    ViewData["Title"] = "Eliminar usuario";
+}
+
+<div class="page-heading">
+    <div>
+        <h1>Eliminar usuario</h1>
+        <p>Confirma si deseas eliminar este usuario.</p>
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(Model.Error))
+{
+    <div class="mensaje-error">
+        @Model.Error
+    </div>
+}
+
+<div class="card">
+
+    <h3>Datos del usuario</h3>
+
+    <p>
+        <strong>Nombre:</strong>
+        @Model.Usuario.Nombre
+    </p>
+
+    <p>
+        <strong>Correo:</strong>
+        @Model.Usuario.Correo
+    </p>
+
+    <p>
+        <strong>Teléfono:</strong>
+        @Model.Usuario.Telefono
+    </p>
+
+    <p>
+        <strong>Rol:</strong>
+        @Model.Usuario.Rol
+    </p>
+
+    <div class="mensaje-eliminar">
+        ¿Está seguro de que desea eliminar este usuario?
+    </div>
+
+    <form method="post" class="botones-eliminar">
+
+        <button type="submit"
+                class="btn btn-danger">
+            Eliminar
+        </button>
+
+        <a asp-page="/Autenticacion/Usuarios"
+           class="btn btn-success">
+            Cancelar
+        </a>
+
+    </form>
+
+</div>
