@@ -1,3 +1,25 @@
+# Marisquería
+
+Aplicación web para gestionar el catálogo de una marisquería, sus pedidos y su inventario. Proyecto académico del curso Programación Avanzada Web (SC-701), desarrollado en C# con ASP.NET Core 8 y Razor Pages.
+
+## Recorrido por el catálogo
+
+La [interfaz de productos](Marisqueria.Web/Web/Pages/Productos) incluye páginas para listar, consultar, agregar, editar y eliminar productos. El [controlador de la API](Marisqueria/API/Controllers/ProductosController.cs) delega las operaciones en la capa de flujo y exige el rol `Administrador` para modificar el catálogo.
+
+| Solicitud | Comportamiento del controlador |
+|---|---|
+| `GET /api/Productos` | Devuelve el catálogo o responde con HTTP 204 si está vacío. |
+| `GET /api/Productos/{IdProducto}` | Devuelve el producto o responde con HTTP 404 si el identificador no existe. |
+| `POST /api/Productos` | Solicita la creación de un producto y responde con HTTP 201 al completarla. |
+
+## Explorar el proyecto
+
+- [API y capas del backend](Marisqueria). Incluye controladores para productos, categorías, pedidos, inventarios, promociones, proveedores, reseñas y usuarios.
+- [Aplicación web](Marisqueria.Web). Para explorar la interfaz en Visual Studio, descargá o cloná el repositorio y abrí `Marisqueria.Web/Marisqueria.Web.sln` en tu computadora.
+
+<details>
+<summary>Ver indicaciones y rúbrica originales del curso SC-701</summary>
+
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/BB1zr2w8)
 # Proyecto Final - Indicaciones Generales
 
@@ -198,3 +220,5 @@ Los requerimientos técnicos son los mismos que para el Avance 1, pero aplicados
 | Parte 2: Avance 1 | 15% |
 | Parte 3: Avance 2 | 25% |
 | **Total** | **50%** |
+
+</details>
